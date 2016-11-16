@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA7D0EDA1DDBE6D000D12BEF /* StudentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D0ED91DDBE6D000D12BEF /* StudentsData.swift */; };
+		DA7D0EDC1DDBE76A00D12BEF /* StudentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D0EDB1DDBE76A00D12BEF /* StudentDetails.swift */; };
 		DA8982CC1DD97B25003F5F8E /* UdacityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8982CB1DD97B25003F5F8E /* UdacityAPI.swift */; };
 		DADCC7971DDAB203005970E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADCC7961DDAB203005970E0 /* Constants.swift */; };
 		DADCC7991DDABBDA005970E0 /* ParseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADCC7981DDABBDA005970E0 /* ParseAPI.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA7D0ED91DDBE6D000D12BEF /* StudentsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsData.swift; sourceTree = "<group>"; };
+		DA7D0EDB1DDBE76A00D12BEF /* StudentDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDetails.swift; sourceTree = "<group>"; };
 		DA8982CB1DD97B25003F5F8E /* UdacityAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPI.swift; sourceTree = "<group>"; };
 		DADCC7961DDAB203005970E0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DADCC7981DDABBDA005970E0 /* ParseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPI.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			children = (
 				DA8982CB1DD97B25003F5F8E /* UdacityAPI.swift */,
 				DADCC7981DDABBDA005970E0 /* ParseAPI.swift */,
+				DA7D0ED91DDBE6D000D12BEF /* StudentsData.swift */,
+				DA7D0EDB1DDBE76A00D12BEF /* StudentDetails.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -306,7 +312,9 @@
 			files = (
 				DADCC7991DDABBDA005970E0 /* ParseAPI.swift in Sources */,
 				DAFB40461DD5A8AE006CAB0E /* LoginViewController.swift in Sources */,
+				DA7D0EDA1DDBE6D000D12BEF /* StudentsData.swift in Sources */,
 				DAFB40441DD5A8AE006CAB0E /* AppDelegate.swift in Sources */,
+				DA7D0EDC1DDBE76A00D12BEF /* StudentDetails.swift in Sources */,
 				DA8982CC1DD97B25003F5F8E /* UdacityAPI.swift in Sources */,
 				DADCC79B1DDAD420005970E0 /* Alerts.swift in Sources */,
 				DADCC7971DDAB203005970E0 /* Constants.swift in Sources */,
