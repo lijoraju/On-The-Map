@@ -42,7 +42,6 @@ class UdacityLogin {
             
             // The first five characters must be removed. They are included by Udacity for security purposes.
             let newData = data!.subdata(in:5..<(data!.count))
-            print("data:\(NSString(data: newData, encoding: String.Encoding.utf8.rawValue))")
             let parseResult = (try! JSONSerialization.jsonObject(with: newData, options: .allowFragments)) as! NSDictionary
             
             // MARK: Get user key
@@ -91,7 +90,6 @@ class UdacityLogin {
                  self.lastName = lastName
             }
            
-            print("firstName:\(self.firstName) \(self.lastName)")
             completionHandler(true, nil)
         }
         

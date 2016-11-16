@@ -33,8 +33,24 @@ class studentLocation {
                 return
             }
             
-            print("data:\(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))")
-            completionHandler(true, nil)
+            // Parsing data
+            let parseResult = (try! JSONSerialization.jsonObject(with: data!, options: .allowFragments)) as! NSDictionary
+            if let results = parseResult["results"] as? [[String:AnyObject]] {
+                
+                // MARK: Retrieving each StudentLocation information
+                for result in results {
+                  
+                    StudentsData.sharedInstance().mapPins.append(StudentDetails.init(data: result))
+                }
+                
+                completionHandler(true, nil)
+            }
+            
+            else {
+                
+                completionHandler(false, "Could not find key 'results' in \(parseResult)")
+            }
+            
         }
         
         task.resume()
