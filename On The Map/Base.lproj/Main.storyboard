@@ -118,7 +118,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZTV-mj-DRH" id="Ejd-6s-AZU">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -176,7 +176,7 @@
         <!--Map View Controller-->
         <scene sceneID="OWx-Ct-clM">
             <objects>
-                <viewController title="Map View Controller" id="kW9-g2-5xX" sceneMemberID="viewController">
+                <viewController title="Map View Controller" id="kW9-g2-5xX" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jfl-OF-rGG"/>
                         <viewControllerLayoutGuide type="bottom" id="B6Y-mR-bgH"/>
@@ -184,16 +184,28 @@
                     <view key="view" contentMode="scaleToFill" id="cVM-S8-fR6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UkL-dT-kzZ"/>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="UkL-dT-kzZ" secondAttribute="trailing" id="L07-33-u5U"/>
+                            <constraint firstItem="UkL-dT-kzZ" firstAttribute="top" secondItem="jfl-OF-rGG" secondAttribute="bottom" id="VT9-eM-nt9"/>
+                            <constraint firstItem="UkL-dT-kzZ" firstAttribute="bottom" secondItem="B6Y-mR-bgH" secondAttribute="top" id="bzL-pb-vQ2"/>
+                            <constraint firstItem="UkL-dT-kzZ" firstAttribute="leading" secondItem="cVM-S8-fR6" secondAttribute="leading" id="h3N-H4-lJX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="Yd6-Gt-WCS">
                         <barButtonItem key="leftBarButtonItem" image="Pin" id="CXl-7C-PYT" userLabel="Pin Bar Button Item"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="9Yn-0Z-fSC"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="UkL-dT-kzZ" id="wkI-uh-2xV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jSm-bS-Z8a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2382" y="-483"/>
+            <point key="canvasLocation" x="2420" y="-483.50824587706148"/>
         </scene>
         <!--OnTheMap Tab Bar Controller-->
         <scene sceneID="4q0-aD-kwj">
