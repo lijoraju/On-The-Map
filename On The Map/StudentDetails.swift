@@ -24,12 +24,16 @@ struct StudentDetails {
             Name = firstname + " " + lastname
         }
         
-        Latitude = data["latitude"] as! Double
-        Longitude = data["longitude"] as! Double
-        mediaURL = data["mediaURL"] as! String
+        if let Lat = data["latitude"] as? Double, let Long = data["longitude"] as? Double, let URL = data["mediaURL"] as? String {
+            
+            Latitude = Lat
+            Longitude = Long
+            mediaURL = URL
+        }
+        
     }
 
 }
 
-        
+
         
