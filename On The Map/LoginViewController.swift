@@ -104,7 +104,7 @@ class LoginViewController: UIViewController {
     // MARK: Account Sign Up
     @IBAction func accountSignUp(_ sender: AnyObject) {
         
-        Open(Scheme: "https://www.udacity.com/account/auth#!/signup")
+        Browser.sharedInstance().Open(Scheme: "https://www.udacity.com/account/auth#!/signup")
     }
 
     // MARK: Configure UI
@@ -127,31 +127,6 @@ class LoginViewController: UIViewController {
         usernameTextField.alpha = 0.5
         passwordTextField.alpha = 0.5
         }
-    
-    }
-    
-    // MARK: Open URL in browser
-    func Open(Scheme: String) {
-    
-    if let url = URL(string: Scheme) {
-        
-        // Opening a URL with iOS 10
-        if #available(iOS 10, *) {
-            
-            UIApplication.shared.open(url, options: [:], completionHandler: { (sucess) in
-                print("Open \(url):\(sucess)")
-            })
-            
-        }
-        
-        // Opening a URL with iOS 9 or earlier
-        else {
-            
-            let sucess = UIApplication.shared.openURL(url)
-            print("Open \(url):\(sucess)")
-         }
-        
-      }
     
     }
     

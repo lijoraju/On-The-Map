@@ -44,5 +44,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
     }
-    
+   
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let View = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        View.canShowCallout = true
+        View.calloutOffset = CGPoint(x: -5, y: -5)
+        View.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+        return View
+    }
+ 
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        let url = Browser.sharedInstance().cleanURL(url: view.annotation!.subtitle!!)
+        Browser.sharedInstance().Open(Scheme: url)
+    }
 }
+    
+    

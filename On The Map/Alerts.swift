@@ -9,7 +9,7 @@
 import Foundation
 import  UIKit
 
-class Alerts: UIViewController {
+class Alerts: UIAlertController {
     
     static let sharedObject = Alerts()
     func showAlert(controller: UIViewController, title:String, message:String) {
