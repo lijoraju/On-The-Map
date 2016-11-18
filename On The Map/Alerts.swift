@@ -21,23 +21,4 @@ class Alerts: UIAlertController {
         controller.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: Double button alert
-    func showDoubleAlert(controller: UIViewController, title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
-            
-            DispatchQueue.main.async {
-                
-                self.performSegue(withIdentifier: "MapToPin", sender: self)
-            }
-            
-        }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(overwriteAction)
-        controller.present(alert, animated: true, completion: nil)
-    }
-    
 }

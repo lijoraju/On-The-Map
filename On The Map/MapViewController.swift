@@ -12,7 +12,7 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    var thisUserPosted = true
+    var thisUserPosted = false
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -47,7 +47,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             // Check whether this user already posted
             if result.Name == UdacityLogin.sharedInstance().Name {
                 
-                thisUserPosted = false
+                thisUserPosted = true
             }
             
         }
@@ -59,7 +59,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         if thisUserPosted {
             
-            Alerts.sharedObject.showDoubleAlert(controller: self, title: "Overwrite", message: "Would you like to overwrite your current location")
+        showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
         }
         
         else {
@@ -87,6 +87,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let url = Browser.sharedInstance().cleanURL(url: view.annotation!.subtitle!!)
         Browser.sharedInstance().Open(Scheme: url)
     }
+    
+    // MARK: Double button alert
+    func showDoubleAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
+            
+            DispatchQueue.main.async {
+                
+                self.performSegue(withIdentifier: "MapToPin", sender: self)
+            }
+            
+        }
+            alert.addAction(cancelAction)
+            alert.addAction(overwriteAction)
+            self.present(alert, animated: true, completion: nil)
+    }
+
 }
     
     
