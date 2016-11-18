@@ -12,6 +12,8 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
+    var thisUserPosted = true
+    
     @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
@@ -41,10 +43,36 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             // Add annotation to map
             mapView.addAnnotation(annotation)
+            
+            // Check whether this user already posted
+            if result.Name == UdacityLogin.sharedInstance().Name {
+                
+                thisUserPosted = false
+            }
+            
         }
         
     }
    
+    // MARK: Tap on Pin Button
+    @IBAction func tapPinButton(_ sender: AnyObject) {
+        
+        if thisUserPosted {
+            
+            Alerts.sharedObject.showDoubleAlert(controller: self, title: "Overwrite", message: "Would you like to overwrite your current location")
+        }
+        
+        else {
+            
+            DispatchQueue.main.async {
+                
+                self.performSegue(withIdentifier: "MapToPin", sender: self)
+            }
+
+        }
+        
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let View = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
