@@ -25,9 +25,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func reloadMapView() {
         
-        // Clear previous annotations
-       // let allAnnotations = self.mapView.annotations
-      //  self.mapView.removeAnnotation(allAnnotations as! MKAnnotation)
         for result in StudentsData.sharedInstance().mapPins {
             
             // Create annotation
@@ -64,7 +61,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         else {
             
-            DispatchQueue.main.async {
+           performUIUpdatesOnMain {
                 
                 self.performSegue(withIdentifier: "MapToPin", sender: self)
             }
@@ -95,7 +92,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
             
-            DispatchQueue.main.async {
+            performUIUpdatesOnMain {
                 
                 self.performSegue(withIdentifier: "MapToPin", sender: self)
             }

@@ -56,6 +56,34 @@ class studentLocation {
         task.resume()
     }
     
+    //Submit a student information node to Parse.
+    func postingStudentLocation(_ latitude: String, longitude: String, addressField: String, link: String, completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
+        
+        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+        request.httpMethod = "POST"
+        request.addValue(Constants.Parse_ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(Constants.REST_APIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        //API Parameters.
+        request.httpBody = "{\"uniqueKey\": \"\(UdacityLogin.sharedInstance().userKey)\", \"firstName\": \"\(UdacityLogin.sharedInstance().firstName)\", \"lastName\": \"\(UdacityLogin.sharedInstance().lastName)\",\"mapString\": \"\(addressField)\", \"mediaURL\": \"\(link)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
+        
+        //Initialize session.
+        let session = URLSession.shared
+        
+        //Initialize task for data retrieval.
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            
+            if error != nil {
+                completionHandler(false, "Failed to submit data.")
+            } else {
+                completionHandler(true, nil)
+            }
+        })
+        task.resume()
+    }
+
+    
     class func sharedInstance()-> studentLocation  {
         
         struct Singleton {

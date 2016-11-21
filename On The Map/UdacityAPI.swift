@@ -13,6 +13,8 @@ class UdacityLogin {
     // MARK: Info about the user, provided through authentication
     var userKey = ""
     var Name = ""
+    var firstName = ""
+    var lastName = ""
     
     // MARK: Log into Udacity
     func loginToUdacity(username: String, password: String, completionHandler: @escaping(_ sucess:Bool,_ errorString:String?)-> Void) {
@@ -86,6 +88,8 @@ class UdacityLogin {
             if let firstName = user["first_name"] as? String, let lastName = user["last_name"] as? String {
                 
                  self.Name = firstName + " " + lastName
+                self.firstName = firstName
+                self.lastName = lastName
                 
             }
            

@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
                                 else {
                                     
                                     // MARK: Error fetching students information from Parse API.
-                                    DispatchQueue.main.async {
+                                    performUIUpdatesOnMain {
                                         
                                         Alerts.sharedObject.showAlert(controller: self, title: "Fetch Info", message: error!)
                                         self.setUIEnabled(enabled: true)
@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
                         else {
                             
                             // MARK: Error fetching first and last name from Udacity.
-                            DispatchQueue.main.async {
+                            performUIUpdatesOnMain {
                                 
                                 Alerts.sharedObject.showAlert(controller: self, title: "JSON Error", message: error!)
                                 self.setUIEnabled(enabled: true)
@@ -87,7 +87,7 @@ class LoginViewController: UIViewController {
                 else {
                     
                     // MARK: Login Error
-                    DispatchQueue.main.async {
+                    performUIUpdatesOnMain {
                         
                         Alerts.sharedObject.showAlert(controller: self, title: "Login Failed", message: error!)
                         self.setUIEnabled(enabled: true)
@@ -145,7 +145,7 @@ class LoginViewController: UIViewController {
     // MARK: Complete Login
     func completeLogin() {
         
-        DispatchQueue.main.async {
+        performUIUpdatesOnMain {
             
            self.performSegue(withIdentifier: "LoginToTabBar", sender: self)
         }
