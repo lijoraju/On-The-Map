@@ -118,7 +118,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZTV-mj-DRH" id="Ejd-6s-AZU">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -231,7 +231,7 @@
         <!--Pin Location View Controller-->
         <scene sceneID="Yec-yp-4w8">
             <objects>
-                <viewController title="Pin Location View Controller" id="5eY-lc-cUQ" sceneMemberID="viewController">
+                <viewController title="Pin Location View Controller" id="5eY-lc-cUQ" customClass="AddStudentLocation" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q9Y-ws-3tn"/>
                         <viewControllerLayoutGuide type="bottom" id="wXM-Mw-MBl"/>
@@ -267,7 +267,12 @@
                                     <constraint firstAttribute="bottom" secondItem="7Wq-zF-MXC" secondAttribute="bottom" constant="26" id="xTS-C2-JC2"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RaA-5F-h0m"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RaA-5F-h0m">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="3SJ-YG-Z0i"/>
+                                    <constraint firstAttribute="height" constant="347" id="Zga-X7-L04"/>
+                                </constraints>
+                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bdu-Ao-FH7" userLabel="Mid View">
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bangalore, India" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xON-lc-ksA" userLabel="Enter Location">
@@ -298,12 +303,16 @@
                                         <state key="normal" title="Find Location On The Map">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="findLocationOnMap:" destination="5eY-lc-cUQ" eventType="touchUpInside" id="os7-fD-ikQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="QjF-Pc-0e8" firstAttribute="centerY" secondItem="y1k-Hv-vzB" secondAttribute="centerY" id="0Zg-N7-ooR"/>
                                     <constraint firstAttribute="trailing" secondItem="QjF-Pc-0e8" secondAttribute="trailing" constant="92" id="Cew-Yu-3ka"/>
+                                    <constraint firstItem="T6O-f1-MmQ" firstAttribute="top" secondItem="y1k-Hv-vzB" secondAttribute="topMargin" id="DU5-AQ-JTG"/>
                                     <constraint firstItem="QjF-Pc-0e8" firstAttribute="top" secondItem="T6O-f1-MmQ" secondAttribute="bottom" constant="11" id="TEU-WV-oG6"/>
                                     <constraint firstItem="QjF-Pc-0e8" firstAttribute="leading" secondItem="y1k-Hv-vzB" secondAttribute="leading" constant="92" id="XpH-tG-7TW"/>
                                     <constraint firstItem="QjF-Pc-0e8" firstAttribute="centerX" secondItem="T6O-f1-MmQ" secondAttribute="centerX" constant="1.5" id="att-RT-6uv"/>
@@ -319,18 +328,30 @@
                             <constraint firstItem="RxJ-wf-nxs" firstAttribute="top" secondItem="q9Y-ws-3tn" secondAttribute="bottom" constant="14" id="QxW-81-7k9"/>
                             <constraint firstItem="y1k-Hv-vzB" firstAttribute="leading" secondItem="znb-Vc-sYJ" secondAttribute="leading" id="UZH-J4-iwM"/>
                             <constraint firstItem="Bdu-Ao-FH7" firstAttribute="leading" secondItem="znb-Vc-sYJ" secondAttribute="leadingMargin" constant="-16" id="XPN-cy-bjV"/>
-                            <constraint firstItem="RaA-5F-h0m" firstAttribute="top" secondItem="RxJ-wf-nxs" secondAttribute="bottom" constant="3" id="fCU-tz-avH"/>
                             <constraint firstAttribute="trailing" secondItem="RxJ-wf-nxs" secondAttribute="trailing" id="g8I-uk-Tdc"/>
                             <constraint firstItem="y1k-Hv-vzB" firstAttribute="top" secondItem="RaA-5F-h0m" secondAttribute="bottom" constant="8" id="nkN-0d-kwR"/>
                             <constraint firstItem="wXM-Mw-MBl" firstAttribute="top" secondItem="Bdu-Ao-FH7" secondAttribute="bottom" constant="200" id="pAR-5v-9LF"/>
                             <constraint firstItem="Bdu-Ao-FH7" firstAttribute="top" secondItem="znb-Vc-sYJ" secondAttribute="top" constant="339" id="qfw-JR-mE2"/>
                             <constraint firstAttribute="bottomMargin" secondItem="y1k-Hv-vzB" secondAttribute="bottom" constant="9" id="rYY-lV-Nu8"/>
-                            <constraint firstItem="wXM-Mw-MBl" firstAttribute="top" secondItem="RaA-5F-h0m" secondAttribute="bottom" constant="145" id="tch-Fl-bxv"/>
                             <constraint firstItem="RaA-5F-h0m" firstAttribute="leading" secondItem="znb-Vc-sYJ" secondAttribute="leadingMargin" constant="-16" id="wlL-FR-gzO"/>
                             <constraint firstItem="RxJ-wf-nxs" firstAttribute="leading" secondItem="znb-Vc-sYJ" secondAttribute="leading" id="wyT-iD-1ZP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="osn-zo-epA"/>
+                    <navigationItem key="navigationItem" id="osn-zo-epA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="OeQ-GJ-7HT">
+                            <connections>
+                                <action selector="cancelAction:" destination="5eY-lc-cUQ" id="RTX-lX-3tf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="enterLink" destination="7Wq-zF-MXC" id="eSk-OP-eEz"/>
+                        <outlet property="findLocationOnMap" destination="QjF-Pc-0e8" id="Q6N-Lo-DJp"/>
+                        <outlet property="location" destination="Bdu-Ao-FH7" id="SId-zK-yJZ"/>
+                        <outlet property="mapView" destination="RaA-5F-h0m" id="JJ5-JS-Hda"/>
+                        <outlet property="submitButton" destination="T6O-f1-MmQ" id="tFD-GI-UEH"/>
+                        <outlet property="where2Study" destination="ySh-3g-4lm" id="Bkb-jJ-vaf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pe9-t9-oAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
