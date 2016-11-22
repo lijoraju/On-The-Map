@@ -243,8 +243,7 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="RxJ-wf-nxs" userLabel="Top View">
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a link to share" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-zF-MXC" userLabel="Enter Link">
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -296,6 +295,9 @@
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="submitStudentLocation:" destination="5eY-lc-cUQ" eventType="touchUpInside" id="Rb2-fa-4tS"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QjF-Pc-0e8">
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -347,9 +349,11 @@
                     <connections>
                         <outlet property="enterLink" destination="7Wq-zF-MXC" id="eSk-OP-eEz"/>
                         <outlet property="findLocationOnMap" destination="QjF-Pc-0e8" id="Q6N-Lo-DJp"/>
-                        <outlet property="location" destination="Bdu-Ao-FH7" id="SId-zK-yJZ"/>
+                        <outlet property="location" destination="xON-lc-ksA" id="fE8-A3-93j"/>
                         <outlet property="mapView" destination="RaA-5F-h0m" id="JJ5-JS-Hda"/>
+                        <outlet property="midView" destination="Bdu-Ao-FH7" id="nz3-Y6-rXJ"/>
                         <outlet property="submitButton" destination="T6O-f1-MmQ" id="tFD-GI-UEH"/>
+                        <outlet property="topView" destination="RxJ-wf-nxs" id="LtV-0K-SdZ"/>
                         <outlet property="where2Study" destination="ySh-3g-4lm" id="Bkb-jJ-vaf"/>
                     </connections>
                 </viewController>
