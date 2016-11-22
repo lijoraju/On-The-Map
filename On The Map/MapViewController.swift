@@ -107,14 +107,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             self.present(alert, animated: true, completion: nil)
     }
 
-    // MARK: Loading updated studentLocation on map
-    @IBAction func refreshMap(_ sender: AnyObject) {
-        
-        refresh()
-    }
-    
     // MARK: Refreshing Map View
-    func refresh() {
+    @IBAction func refreshMap(_ sender: AnyObject) {
         
         // Fetching students infomation from parse API
         studentLocation.sharedInstance().gettingStudentLocations{ (sucess,error) in
@@ -136,10 +130,33 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
                 
             }
-
+            
         }
+
+    }
+    
+    // MARK: Logout from Udacity API or Facebook API
+    @IBAction func logout(_ sender: AnyObject) {
         
+        UdacityLogin.sharedInstance().logoutFromUdacity { (sucess,error) in
+            
+            if sucess {
+                
+                performUIUpdatesOnMain {
+                    
+                    self.dismiss(animated: true, completion: nil)
+                }
+                
+            }
+            
+            else {
+                
+                Alerts.sharedObject.showAlert(controller: self, title: "Logout Failed", message: error!)
+            }
+            
+        }
+
     }
 
 }
-    
+

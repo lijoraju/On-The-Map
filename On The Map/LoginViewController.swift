@@ -146,8 +146,11 @@ class LoginViewController: UIViewController {
     func completeLogin() {
         
         performUIUpdatesOnMain {
-            
-           self.performSegue(withIdentifier: "LoginToTabBar", sender: self)
+           
+            self.setUIEnabled(enabled: true)
+            self.usernameTextField.text = nil
+            self.passwordTextField.text = nil
+            self.performSegue(withIdentifier: "LoginToTabBar", sender: self)
         }
         
     }
