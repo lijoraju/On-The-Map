@@ -113,7 +113,8 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate, UITextFieldDelega
             enterLink.isHidden = false
             where2Study.isHidden = true
             submitButton.isHidden = false
-            midView.isHidden = false
+            midView.isHidden = true
+            topView.isHidden = false
         }
      
         func setUIEnabled(enabled: Bool) {
