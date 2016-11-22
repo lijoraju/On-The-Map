@@ -25,6 +25,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func reloadMapView() {
         
+        //remove all previous annotations
+        let allAnnotations = self.mapView.annotations
+        mapView.removeAnnotations(allAnnotations)
+        
         for result in StudentsData.sharedInstance().mapPins {
             
             // Create annotation
@@ -47,7 +51,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 thisUserPosted = true
             }
             
-        }
+            }
         
     }
    
@@ -103,6 +107,39 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             self.present(alert, animated: true, completion: nil)
     }
 
-}
+    // MARK: Loading updated studentLocation on map
+    @IBAction func refreshMap(_ sender: AnyObject) {
+        
+        refresh()
+    }
     
+    // MARK: Refreshing Map View
+    func refresh() {
+        
+        // Fetching students infomation from parse API
+        studentLocation.sharedInstance().gettingStudentLocations{ (sucess,error) in
+            
+            if error != nil {
+                
+                performUIUpdatesOnMain {
+                    
+                    Alerts.sharedObject.showAlert(controller: self, title: "Error Refreshing Map", message: error!)
+                }
+                
+            }
+                
+            else {
+                
+                performUIUpdatesOnMain {
+                    
+                    self.reloadMapView()
+                }
+                
+            }
+
+        }
+        
+    }
+
+}
     

@@ -201,7 +201,11 @@
                                 <action selector="tapPinButton:" destination="kW9-g2-5xX" id="Sma-z7-zWj"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="9Yn-0Z-fSC"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="9Yn-0Z-fSC">
+                            <connections>
+                                <action selector="refreshMap:" destination="kW9-g2-5xX" id="bAb-s2-nwl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="UkL-dT-kzZ" id="wkI-uh-2xV"/>

@@ -87,9 +87,9 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate, UITextFieldDelega
      if sucess {
      
      performUIUpdatesOnMain {
-     
-     self.dismiss(animated: true, completion: nil)
-     }
+        
+        self.dismiss(animated: true, completion: nil)
+        }
      
      }
      
@@ -98,10 +98,11 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate, UITextFieldDelega
      performUIUpdatesOnMain {
      
      Alerts.sharedObject.showAlert(controller: self, title: "Location posting error", message: error!)
-     }
-     }
-     
-     }
+                }
+        
+            }
+        
+        }
      
      }
    
