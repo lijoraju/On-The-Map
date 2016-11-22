@@ -20,5 +20,5 @@ class Alerts: UIAlertController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         controller.present(alert, animated: true, completion: nil)
     }
-    
+       
 }

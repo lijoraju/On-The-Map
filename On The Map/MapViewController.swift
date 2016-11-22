@@ -60,18 +60,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         if thisUserPosted {
             
-        showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
+            showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
+            
         }
-        
+            
         else {
             
-           performUIUpdatesOnMain {
+            performUIUpdatesOnMain {
                 
                 self.performSegue(withIdentifier: "MapToPin", sender: self)
             }
-
+            
         }
-        
+                
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -89,6 +90,42 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         Browser.sharedInstance().Open(Scheme: url)
     }
     
+    // MARK: Refreshing Map View
+    @IBAction func tapRefreshButton(_ sender: AnyObject) {
+        
+        Settings.sharedInstance().refreshButtonAction { (refresh) in
+            
+            if refresh {
+                
+                performUIUpdatesOnMain {
+                    
+                    self.reloadMapView()
+                }
+
+            }
+            
+        }
+        
+    }
+    
+    // MARK: Logout from Udacity API or Facebook API
+    @IBAction func tapLogoutButton(_ sender: AnyObject) {
+        
+        Settings.sharedInstance().logoutButtonAction { (logout) in
+            
+            if logout {
+                
+                performUIUpdatesOnMain {
+                    
+                    self.dismiss(animated: true, completion: nil)
+                }
+
+            }
+            
+        }
+        
+    }
+    
     // MARK: Double button alert
     func showDoubleAlert(title: String, message: String) {
         
@@ -102,60 +139,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             
         }
-            alert.addAction(cancelAction)
-            alert.addAction(overwriteAction)
-            self.present(alert, animated: true, completion: nil)
-    }
-
-    // MARK: Refreshing Map View
-    @IBAction func refreshMap(_ sender: AnyObject) {
         
-        // Fetching students infomation from parse API
-        studentLocation.sharedInstance().gettingStudentLocations{ (sucess,error) in
-            
-            if error != nil {
-                
-                performUIUpdatesOnMain {
-                    
-                    Alerts.sharedObject.showAlert(controller: self, title: "Error Refreshing Map", message: error!)
-                }
-                
-            }
-                
-            else {
-                
-                performUIUpdatesOnMain {
-                    
-                    self.reloadMapView()
-                }
-                
-            }
-            
-        }
-
-    }
-    
-    // MARK: Logout from Udacity API or Facebook API
-    @IBAction func logout(_ sender: AnyObject) {
-        
-        UdacityLogin.sharedInstance().logoutFromUdacity { (sucess,error) in
-            
-            if sucess {
-                
-                performUIUpdatesOnMain {
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }
-                
-            }
-            
-            else {
-                
-                Alerts.sharedObject.showAlert(controller: self, title: "Logout Failed", message: error!)
-            }
-            
-        }
-
+        alert.addAction(cancelAction)
+        alert.addAction(overwriteAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

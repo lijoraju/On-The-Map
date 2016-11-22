@@ -119,7 +119,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZTV-mj-DRH" id="Ejd-6s-AZU">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -199,18 +199,18 @@
                     <navigationItem key="navigationItem" title="On The Map" id="Yd6-Gt-WCS">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="ugX-Op-qZd">
                             <connections>
-                                <action selector="logout:" destination="kW9-g2-5xX" id="Wn2-2h-pbX"/>
+                                <action selector="tapLogoutButton:" destination="kW9-g2-5xX" id="gw0-gu-EW1"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="9Yn-0Z-fSC">
                                 <connections>
-                                    <action selector="refreshMap:" destination="kW9-g2-5xX" id="bAb-s2-nwl"/>
+                                    <action selector="tapRefreshButton:" destination="kW9-g2-5xX" id="M3Y-UY-fog"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="Pin" id="CXl-7C-PYT" userLabel="Pin Bar Button Item">
                                 <connections>
-                                    <action selector="tapPinButton:" destination="kW9-g2-5xX" id="Sma-z7-zWj"/>
+                                    <action selector="tapPinButton:" destination="kW9-g2-5xX" id="mGl-gP-k1H"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -227,7 +227,7 @@
         <!--Pin Location-->
         <scene sceneID="0fC-mu-0r4">
             <objects>
-                <navigationController title="Pin Location" id="ief-lb-609" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MapTo" title="Pin Location" id="ief-lb-609" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FY1-2e-uFQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
