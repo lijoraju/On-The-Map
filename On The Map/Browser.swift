@@ -6,7 +6,7 @@
 //  Copyright © 2016 LIJORAJU. All rights reserved.
 //
 
-import Foundation
+
 import UIKit
 
 class Browser: UIViewController {

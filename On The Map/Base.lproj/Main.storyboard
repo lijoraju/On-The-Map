@@ -109,16 +109,16 @@
         <!--List View Controller-->
         <scene sceneID="ErT-yX-WOC">
             <objects>
-                <tableViewController title="List View Controller" id="7ks-fR-9TP" sceneMemberID="viewController">
+                <tableViewController title="List View Controller" id="7ks-fR-9TP" customClass="ListViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="OvL-up-Trc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZTV-mj-DRH">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CNx-RZ-SgV">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZTV-mj-DRH" id="Ejd-6s-AZU">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CNx-RZ-SgV" id="yoG-Hj-Ljt">
                                     <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
@@ -131,10 +131,28 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="dY4-dY-RjY">
-                        <barButtonItem key="leftBarButtonItem" image="Pin" id="n1p-MW-NlO" userLabel="Pin Bar Button Item"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="k3S-Dy-CRf"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="eQa-OY-gql">
+                            <connections>
+                                <action selector="tapLogoutButton:" destination="7ks-fR-9TP" id="rsY-HO-s0J"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="k3S-Dy-CRf">
+                                <connections>
+                                    <action selector="tapRefreshButton:" destination="7ks-fR-9TP" id="tQA-hT-6zt"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Pin" id="n1p-MW-NlO" userLabel="Pin Bar Button Item">
+                                <connections>
+                                    <action selector="tapPinButton:" destination="7ks-fR-9TP" id="ASR-44-RQK"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="ief-lb-609" kind="presentation" identifier="ListToMap" id="p7R-6f-57A"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6cu-VB-Xi2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -398,4 +416,7 @@
         <image name="Pin" width="32" height="32"/>
         <image name="UdacityLogo" width="80" height="80"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="p7R-6f-57A"/>
+    </inferredMetricsTieBreakers>
 </document>

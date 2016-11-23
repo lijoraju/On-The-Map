@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA100D871DE558450000041F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA100D861DE558450000041F /* ListViewController.swift */; };
 		DA7D0EDA1DDBE6D000D12BEF /* StudentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D0ED91DDBE6D000D12BEF /* StudentsData.swift */; };
 		DA7D0EDC1DDBE76A00D12BEF /* StudentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D0EDB1DDBE76A00D12BEF /* StudentDetails.swift */; };
 		DA7D0EDE1DDC034600D12BEF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D0EDD1DDC034600D12BEF /* MapViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA100D861DE558450000041F /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DA7D0ED91DDBE6D000D12BEF /* StudentsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsData.swift; sourceTree = "<group>"; };
 		DA7D0EDB1DDBE76A00D12BEF /* StudentDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDetails.swift; sourceTree = "<group>"; };
 		DA7D0EDD1DDC034600D12BEF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				DAFB40451DD5A8AE006CAB0E /* LoginViewController.swift */,
 				DA7D0EDD1DDC034600D12BEF /* MapViewController.swift */,
+				DA100D861DE558450000041F /* ListViewController.swift */,
 				DAA22E221DDED21B00943546 /* AddStudentLocation.swift */,
 			);
 			name = Controller;
@@ -331,6 +334,7 @@
 				DAFB40461DD5A8AE006CAB0E /* LoginViewController.swift in Sources */,
 				DA7D0EDA1DDBE6D000D12BEF /* StudentsData.swift in Sources */,
 				DAD3ABF11DE346A0004D1DA7 /* GCDBlackBox.swift in Sources */,
+				DA100D871DE558450000041F /* ListViewController.swift in Sources */,
 				DAFB40441DD5A8AE006CAB0E /* AppDelegate.swift in Sources */,
 				DA7D0EDE1DDC034600D12BEF /* MapViewController.swift in Sources */,
 				DAA22E231DDED21B00943546 /* AddStudentLocation.swift in Sources */,

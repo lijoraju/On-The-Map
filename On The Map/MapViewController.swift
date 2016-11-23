@@ -6,7 +6,6 @@
 //  Copyright © 2016 LIJORAJU. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import MapKit
 
@@ -61,7 +60,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if thisUserPosted {
             
             showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
-            
         }
             
         else {
@@ -126,7 +124,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    // MARK: Double button alert
+    // MARK: Overwrite alert
     func showDoubleAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
