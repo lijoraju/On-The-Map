@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugTextLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
+  
 
     override func viewDidLoad() {
         
@@ -106,6 +108,89 @@ class LoginViewController: UIViewController {
         Browser.sharedInstance().Open(Scheme: "https://www.udacity.com/account/auth#!/signup")
     }
 
+    // MARK: Facebook Login button action
+    @IBAction func loginFacebook(_ sender: AnyObject) {
+        
+        setUIEnabled(enabled: false)
+        let login = FBSDKLoginManager()
+        login.loginBehavior = FBSDKLoginBehavior.systemAccount
+        login.logIn(withReadPermissions: ["public_profile", "email"], from: self, handler: { (result, error) in
+            
+            if error != nil {
+                
+                // MARK: Error Loggin Into Facebook
+               performUIUpdatesOnMain {
+                    Alerts.sharedObject.showAlert(controller: self, title: "FB Login Error", message: error! as! String)
+                    self.setUIEnabled(enabled: true)
+                }
+                
+                self.setUIEnabled(enabled: true)
+            }
+                
+            else if (result?.isCancelled)! {
+                
+                self.setUIEnabled(enabled: true)
+            }
+                
+            else {
+                
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email, first_name, last_name"]).start(completionHandler: {(connection, result, error)-> Void in
+                    if error != nil {
+                        
+                        // MARK: Error Getting User Name
+                        performUIUpdatesOnMain {
+                            
+                            Alerts.sharedObject.showAlert(controller: self, title: "Error Getting User", message: error! as! String)
+                            self.setUIEnabled(enabled: true)
+                        }
+                        
+                    }
+                        
+                    else {
+                        
+                        if let userDetails = result as? [String:String] {
+                            
+                            let firstName = userDetails["first_name"]!
+                            let lastName = userDetails["last_name"]!
+                            StudentsData().isLoggedInFacebook = true
+                            
+                            // Set name From Facebook
+                            UdacityLogin.sharedInstance().firstName = firstName
+                            UdacityLogin.sharedInstance().lastName = lastName
+                            
+                            // Fetching student information from Udacity.
+                            studentLocation.sharedInstance().gettingStudentLocations { (success, errorString) in
+                                
+                                if success {
+            
+                                    self.completeLogin()
+                                }
+                                    
+                                else {
+                                    
+                                    // MARK: Error Getting Data from Udacity
+                                    performUIUpdatesOnMain {
+                                        
+                                        Alerts.sharedObject.showAlert(controller: self, title: "Fetch Info", message: errorString!)
+                                        self.setUIEnabled(enabled: true)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                })
+                
+            }
+            
+        })
+        
+    }
+    
     // MARK: Configure UI
     private func setUIEnabled(enabled:Bool) {
     

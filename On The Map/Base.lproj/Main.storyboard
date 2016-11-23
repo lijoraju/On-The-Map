@@ -53,9 +53,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mp-q2-eeZ" userLabel="Login Button">
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="Yt3-3P-meN"/>
+                                            <constraint firstAttribute="height" constant="35" id="Yt3-3P-meN"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -68,11 +68,20 @@
                                             <constraint firstAttribute="height" constant="35" id="UoU-pL-eog"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Don't have an account?SignUp">
+                                        <state key="normal" title="Don't have an account? SignUp">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="accountSignUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sai-7P-7mF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ik4-aM-kJR" userLabel="Facebook Login Button">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="9Cg-HT-X1h"/>
+                                        </constraints>
+                                        <state key="normal" image="facebook"/>
+                                        <connections>
+                                            <action selector="loginFacebook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nJk-uH-kld"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gro-Bg-m0h" userLabel="Debug Text Label">
@@ -415,6 +424,7 @@
         <image name="Map" width="32" height="32"/>
         <image name="Pin" width="32" height="32"/>
         <image name="UdacityLogo" width="80" height="80"/>
+        <image name="facebook" width="502" height="66"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="p7R-6f-57A"/>

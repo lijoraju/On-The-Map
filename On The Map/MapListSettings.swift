@@ -8,6 +8,7 @@
 
 
 import UIKit
+import FBSDKLoginKit
 
 class Settings: UIViewController {
    
@@ -38,6 +39,13 @@ class Settings: UIViewController {
     // MARK: Logout from udacity API
     func logoutButtonAction(completionHandler: @escaping(_ logout: Bool)-> Void) {
         
+        // Logout from facebook
+        if StudentsData.sharedInstance().isLoggedInFacebook {
+            
+            FBSDKLoginManager().logOut()
+        }
+            
+        // Logout from Udacity
         UdacityLogin.sharedInstance().logoutFromUdacity { (sucess,error) in
             
             if sucess {

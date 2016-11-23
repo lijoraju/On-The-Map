@@ -12,6 +12,7 @@ class StudentsData: NSData {
     
     // Each pin on the map is a StudentLocation object.
     var mapPins = [StudentDetails]()
+    var isLoggedInFacebook = false
     
     // Allows other classes to reference a common instance of the mapPins array.
     class func sharedInstance()-> StudentsData {
