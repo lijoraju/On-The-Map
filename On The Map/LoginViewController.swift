@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugTextLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
 
     override func viewDidLoad() {
@@ -134,7 +135,8 @@ class LoginViewController: UIViewController {
                 
             else {
                 
-                FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email, first_name, last_name"]).start(completionHandler: {(connection, result, error)-> Void in
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email, first_name, last_name"]).start(completionHandler: { (connection, result, error)-> Void in
+                    
                     if error != nil {
                         
                         // MARK: Error Getting User Name
@@ -157,7 +159,7 @@ class LoginViewController: UIViewController {
                             // Set name From Facebook
                             UdacityLogin.sharedInstance().firstName = firstName
                             UdacityLogin.sharedInstance().lastName = lastName
-                            
+                            UdacityLogin.sharedInstance().Name = firstName + " " + lastName
                             // Fetching student information from Udacity.
                             StudentLocation.sharedInstance().gettingStudentLocations { (success, errorString) in
                                 
@@ -183,12 +185,15 @@ class LoginViewController: UIViewController {
                         
                     }
                     
-                })
+                }
                 
+                )
             }
             
-        })
+        }
         
+        )
+
     }
     
     // MARK: Configure UI
@@ -200,6 +205,7 @@ class LoginViewController: UIViewController {
     loginButton.isEnabled = enabled
     if enabled {
         
+        activityIndicator.stopAnimating()
         loginButton.alpha = 1.0
         usernameTextField.alpha = 1.0
         passwordTextField.alpha = 1.0
@@ -207,6 +213,7 @@ class LoginViewController: UIViewController {
         
     else {
         
+        activityIndicator.startAnimating()
         loginButton.alpha = 0.5
         usernameTextField.alpha = 0.5
         passwordTextField.alpha = 0.5
@@ -232,7 +239,6 @@ class LoginViewController: UIViewController {
         performUIUpdatesOnMain {
            
             self.setUIEnabled(enabled: true)
-            self.usernameTextField.text = nil
             self.passwordTextField.text = nil
             self.performSegue(withIdentifier: "LoginToTabBar", sender: self)
         }

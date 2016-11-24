@@ -87,7 +87,7 @@ class UdacityLogin {
             
             if let firstName = user["first_name"] as? String, let lastName = user["last_name"] as? String {
                 
-                 self.Name = firstName + " " + lastName
+                self.Name = firstName + " " + lastName
                 self.firstName = firstName
                 self.lastName = lastName
                 
