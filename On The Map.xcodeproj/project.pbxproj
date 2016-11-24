@@ -66,6 +66,7 @@
 		DADCC7961DDAB203005970E0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DADCC7981DDABBDA005970E0 /* ParseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPI.swift; sourceTree = "<group>"; };
 		DADCC79A1DDAD420005970E0 /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		DAEC78801DE6A41C00DB0F13 /* On The Map.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "On The Map.entitlements"; sourceTree = "<group>"; };
 		DAFB40401DD5A8AE006CAB0E /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFB40431DD5A8AE006CAB0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAFB40451DD5A8AE006CAB0E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 		DAFB40421DD5A8AE006CAB0E /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				DAEC78801DE6A41C00DB0F13 /* On The Map.entitlements */,
 				DA8982CA1DD970BF003F5F8E /* Model */,
 				DA8982C71DD96FCB003F5F8E /* View */,
 				DA8982C91DD97088003F5F8E /* Controller */,
@@ -286,7 +288,13 @@
 				TargetAttributes = {
 					DAFB403F1DD5A8AE006CAB0E = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = V2SA2B936Q;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					DAFB40531DD5A8AE006CAB0E = {
 						CreatedOnToolsVersion = 8.0;
@@ -518,6 +526,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "On The Map/On The Map.entitlements";
+				DEVELOPMENT_TEAM = V2SA2B936Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -534,6 +544,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "On The Map/On The Map.entitlements";
+				DEVELOPMENT_TEAM = V2SA2B936Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
