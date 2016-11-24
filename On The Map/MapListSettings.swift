@@ -42,9 +42,13 @@ class Settings: UIViewController {
         // Logout from facebook
         if StudentsData.sharedInstance().isLoggedInFacebook {
             
-            FBSDKLoginManager().logOut()
+            FBSDKAccessToken.setCurrent(nil)
+            FBSDKProfile.setCurrent(nil)
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+            StudentsData.sharedInstance().isLoggedInFacebook = false
         }
-            
+        
         // Logout from Udacity
         UdacityLogin.sharedInstance().logoutFromUdacity { (sucess,error) in
             

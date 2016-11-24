@@ -154,7 +154,6 @@ class LoginViewController: UIViewController {
                             
                             let firstName = userDetails["first_name"]!
                             let lastName = userDetails["last_name"]!
-                            StudentsData().isLoggedInFacebook = true
                             
                             // Set name From Facebook
                             UdacityLogin.sharedInstance().firstName = firstName
@@ -165,6 +164,7 @@ class LoginViewController: UIViewController {
                                 
                                 if success {
             
+                                    StudentsData.sharedInstance().isLoggedInFacebook = true
                                     self.completeLogin()
                                 }
                                     
