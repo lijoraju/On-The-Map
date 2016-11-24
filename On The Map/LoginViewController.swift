@@ -11,6 +11,8 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
+    let textFieldDelegate = TextFieldDelegate()
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugTextLabel: UILabel!
@@ -21,6 +23,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        usernameTextField.delegate = textFieldDelegate
+        passwordTextField.delegate = textFieldDelegate
+        self.hideKeyboardWhenTappedAround()
     }
      
     // MARK: Login with Email Function
@@ -246,6 +251,5 @@ class LoginViewController: UIViewController {
     }
     
 }
-
 
 

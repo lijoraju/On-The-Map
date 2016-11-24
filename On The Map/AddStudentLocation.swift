@@ -9,9 +9,9 @@
 import UIKit
 import  MapKit
 
-class AddStudentLocation: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
+class AddStudentLocation: UIViewController, MKMapViewDelegate {
     
-    
+        let textFieldDelegate = TextFieldDelegate()
         var coordinates: CLLocationCoordinate2D!
     
         @IBOutlet weak var mapView: MKMapView!
@@ -24,9 +24,11 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate, UITextFieldDelega
         @IBOutlet weak var midView: UIView!
      
         override func viewDidLoad() {
+            
             super.viewDidLoad()
-            enterLink.delegate = self
-            location.delegate = self
+            enterLink.delegate = textFieldDelegate
+            location.delegate = textFieldDelegate
+            self.hideKeyboardWhenTappedAround()
             displayOriginalUI()
      
         }
