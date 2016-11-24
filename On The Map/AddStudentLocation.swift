@@ -15,6 +15,7 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate {
         var coordinates: CLLocationCoordinate2D!
     
         @IBOutlet weak var mapView: MKMapView!
+        @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
         @IBOutlet weak var submitButton: UIButton!
         @IBOutlet weak var enterLink: UITextField!
         @IBOutlet weak var where2Study: UILabel!
@@ -127,6 +128,7 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate {
             enterLink.isEnabled = true
             if enabled {
      
+                activityIndicator.stopAnimating()
                 location.alpha = 1.0
                 submitButton.alpha = 1.0
                 findLocationOnMap.alpha = 1.0
@@ -137,6 +139,7 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate {
      
             else {
      
+                activityIndicator.startAnimating()
                 location.alpha = 0.3
                 submitButton.alpha = 0.3
                 findLocationOnMap.alpha = 0.3
@@ -146,6 +149,5 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate {
             }
      
         }
-
     
     }

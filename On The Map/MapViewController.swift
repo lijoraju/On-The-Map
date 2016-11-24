@@ -13,8 +13,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     var thisUserPosted = false
     
+    @IBOutlet weak var pinButton: UIBarButtonItem!
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
-
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -52,11 +56,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             }
         
+        setUIEnabled(true)
     }
    
     // MARK: Tap on Pin Button
     @IBAction func tapPinButton(_ sender: AnyObject) {
         
+        setUIEnabled(false)
         if thisUserPosted {
             
             showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
@@ -66,6 +72,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             performUIUpdatesOnMain {
                 
+                self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "MapToPin", sender: self)
             }
             
@@ -91,6 +98,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // MARK: Refreshing Map View
     @IBAction func tapRefreshButton(_ sender: AnyObject) {
         
+        setUIEnabled(false)
         Settings.sharedInstance().refreshButtonAction { (refresh) in
             
             if refresh {
@@ -109,12 +117,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // MARK: Logout from Udacity API or Facebook API
     @IBAction func tapLogoutButton(_ sender: AnyObject) {
         
+        setUIEnabled(false)
         Settings.sharedInstance().logoutButtonAction { (logout) in
             
             if logout {
                 
                 performUIUpdatesOnMain {
-                    
+                    self.setUIEnabled(true)
                     self.dismiss(animated: true, completion: nil)
                 }
 
@@ -128,11 +137,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func showDoubleAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result: UIAlertAction)-> Void in
+            
+            self.setUIEnabled(true)
+        }
+        
         let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
             
             performUIUpdatesOnMain {
                 
+                self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "MapToPin", sender: self)
             }
             
@@ -143,5 +157,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 
+    // MARK: Configure UI
+    func setUIEnabled(_ enabled: Bool) {
+        
+        if enabled {
+            
+            activityIndicator.stopAnimating()
+            mapView.alpha = 1.0
+            logoutButton.isEnabled = true
+            refreshButton.isEnabled = true
+            pinButton.isEnabled = true
+        }
+        
+        else {
+            
+            activityIndicator.startAnimating()
+            mapView.alpha = 0.5
+            logoutButton.isEnabled = false
+            refreshButton.isEnabled = false
+            pinButton.isEnabled = false
+        }
+        
+    }
+    
 }
 

@@ -202,7 +202,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: Configure UI
-    private func setUIEnabled(enabled:Bool) {
+    func setUIEnabled(enabled:Bool) {
     
     usernameTextField.isEnabled = enabled
     passwordTextField.isEnabled = enabled

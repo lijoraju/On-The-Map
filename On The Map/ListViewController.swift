@@ -10,6 +10,12 @@ import UIKit
 
 class ListViewController: UITableViewController {
     
+    @IBOutlet var table: UITableView!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet weak var pinButton: UIBarButtonItem!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var thisUserPosted = false
     
     override func viewDidLoad() {
@@ -21,12 +27,14 @@ class ListViewController: UITableViewController {
     // MARK: Logout button action
     @IBAction func tapLogoutButton(_ sender: AnyObject) {
         
+        self.setUIEnabled(false)
         Settings.sharedInstance().logoutButtonAction { (logout) in
             
             if logout {
                 
                 performUIUpdatesOnMain {
                     
+                    self.setUIEnabled(true)
                     self.dismiss(animated: true, completion: nil)
                 }
                 
@@ -39,11 +47,13 @@ class ListViewController: UITableViewController {
     // MARK: Refresh button action
     @IBAction func tapRefreshButton(_ sender: AnyObject) {
         
+        self.setUIEnabled(false)
         Settings.sharedInstance().refreshButtonAction { (refresh) in
             
             if refresh {
                 
                 self.tableView.reloadData()
+                self.setUIEnabled(true)
             }
             
         }
@@ -53,6 +63,7 @@ class ListViewController: UITableViewController {
     // MARK: Pin button action
     @IBAction func tapPinButton(_ sender: AnyObject) {
         
+        self.setUIEnabled(false)
         if thisUserPosted {
             
             showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
@@ -62,6 +73,7 @@ class ListViewController: UITableViewController {
             
             performUIUpdatesOnMain {
                 
+                self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "ListToPin", sender: self)
             }
             
@@ -107,11 +119,16 @@ class ListViewController: UITableViewController {
     func showDoubleAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result: UIAlertAction)-> Void in
+         
+            self.setUIEnabled(true)
+        }
+        
         let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
             
             performUIUpdatesOnMain {
                 
+                self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "ListToMap", sender: self)
             }
             
@@ -120,6 +137,29 @@ class ListViewController: UITableViewController {
         alert.addAction(cancelAction)
         alert.addAction(overwriteAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: Configure UI
+    func setUIEnabled(_ enabled: Bool) {
+        
+        if enabled {
+            
+            table.alpha = 1.0
+            activityIndicator.stopAnimating()
+            logoutButton.isEnabled = true
+            refreshButton.isEnabled = true
+            pinButton.isEnabled = true
+        }
+        
+        else {
+            
+            table.alpha = 0.5
+            activityIndicator.startAnimating()
+            logoutButton.isEnabled = false
+            refreshButton.isEnabled = false
+            pinButton.isEnabled = false
+        }
+        
     }
     
 }
