@@ -8,7 +8,7 @@
 
 import Foundation
 
-class studentLocation {
+class StudentLocation {
     
     // These shared keys are used by all students in Udacity.com's "iOS Networking with Swift" course.
     let Parse_ApplicationID = Constants.Parse_ApplicationID
@@ -84,11 +84,11 @@ class studentLocation {
     }
 
     
-    class func sharedInstance()-> studentLocation  {
+    class func sharedInstance()-> StudentLocation  {
         
         struct Singleton {
             
-          static let sharedInstance = studentLocation()
+          static let sharedInstance = StudentLocation()
         }
         
         return Singleton.sharedInstance

@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
                         if sucess {
                             
                             // Fetching students information from Parse API.
-                            studentLocation.sharedInstance().gettingStudentLocations() { (sucess, error) in
+                            StudentLocation.sharedInstance().gettingStudentLocations() { (sucess, error) in
                                 
                                 if sucess {
                                     
@@ -159,7 +159,7 @@ class LoginViewController: UIViewController {
                             UdacityLogin.sharedInstance().lastName = lastName
                             
                             // Fetching student information from Udacity.
-                            studentLocation.sharedInstance().gettingStudentLocations { (success, errorString) in
+                            StudentLocation.sharedInstance().gettingStudentLocations { (success, errorString) in
                                 
                                 if success {
             

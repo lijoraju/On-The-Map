@@ -16,7 +16,7 @@ class Settings: UIViewController {
     func refreshButtonAction(completionHandler: @escaping(_ refresh: Bool)-> Void) {
         
         // Fetching students infomation from parse API
-        studentLocation.sharedInstance().gettingStudentLocations { (sucess,error) in
+        StudentLocation.sharedInstance().gettingStudentLocations { (sucess,error) in
             
             if error != nil {
                 
