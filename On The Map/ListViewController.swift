@@ -48,12 +48,22 @@ class ListViewController: UITableViewController {
     @IBAction func tapRefreshButton(_ sender: AnyObject) {
         
         self.setUIEnabled(false)
-        Settings.sharedInstance().refreshButtonAction { (refresh) in
+        Settings.sharedInstance().refreshButtonAction { (refresh, errorString) in
             
             if refresh {
                 
                 self.tableView.reloadData()
                 self.setUIEnabled(true)
+            }
+            
+            else {
+                
+                self.setUIEnabled(true)
+                performUIUpdatesOnMain {
+                    
+                    Alerts.sharedObject.showAlert(controller: self, title: "Failed To Refresh", message: errorString!)
+                }
+        
             }
             
         }

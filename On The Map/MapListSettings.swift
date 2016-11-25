@@ -13,23 +13,19 @@ import FBSDKLoginKit
 class Settings: UIViewController {
    
     // MARK: Refresh map
-    func refreshButtonAction(completionHandler: @escaping(_ refresh: Bool)-> Void) {
+    func refreshButtonAction(completionHandler: @escaping(_ refresh: Bool, _ error: String?)-> Void) {
         
         // Fetching students infomation from parse API
         StudentLocation.sharedInstance().gettingStudentLocations { (sucess,error) in
             
             if error != nil {
                 
-                performUIUpdatesOnMain {
-                    
-                    Alerts.sharedObject.showAlert(controller: self, title: "Error Refreshing Map", message: error!)
-                }
-                
+                completionHandler(false, error)
             }
                 
             else {
                 
-                completionHandler(true)
+                completionHandler(true,nil)
             }
             
         }

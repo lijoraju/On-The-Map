@@ -99,7 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func tapRefreshButton(_ sender: AnyObject) {
         
         setUIEnabled(false)
-        Settings.sharedInstance().refreshButtonAction { (refresh) in
+        Settings.sharedInstance().refreshButtonAction { (refresh, errorString) in
             
             if refresh {
                 
@@ -108,6 +108,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     self.reloadMapView()
                 }
 
+            }
+            
+            else {
+                
+                self.setUIEnabled(true)
+                performUIUpdatesOnMain {
+                    
+                    Alerts.sharedObject.showAlert(controller: self, title: "Failed To Refresh", message: errorString!)
+                }
+                
             }
             
         }

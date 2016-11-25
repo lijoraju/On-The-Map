@@ -27,14 +27,20 @@ class StudentLocation {
         // Initialize task for data retrieval.
         let task = session.dataTask(with: request as URLRequest) { (data,response,error) in
             
-            if error != nil {
+            guard (error == nil) else {
                 
              completionHandler(false, error!.localizedDescription)
                 return
             }
             
+            guard let data = data else {
+            
+                completionHandler(false, "No data was returned by the request!")
+                return
+            }
+            
             // Parsing data
-            let parseResult = (try! JSONSerialization.jsonObject(with: data!, options: .allowFragments)) as! NSDictionary
+            let parseResult = (try! JSONSerialization.jsonObject(with: data, options: .allowFragments)) as! NSDictionary
             if let results = parseResult["results"] as? [[String:AnyObject]] {
                 
                 // MARK: Retrieving each StudentLocation information
