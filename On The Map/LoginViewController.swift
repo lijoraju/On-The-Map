@@ -11,6 +11,7 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
+    // Delegate for textfields
     let textFieldDelegate = TextFieldDelegate()
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -19,9 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
-
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         usernameTextField.delegate = textFieldDelegate
         passwordTextField.delegate = textFieldDelegate
@@ -30,10 +29,8 @@ class LoginViewController: UIViewController {
      
     // MARK: Login with Email Function
     @IBAction func loginButtonPressed(_ sender: AnyObject) {
-        
         setUIEnabled(enabled: false)
         if isIncomplete() {
-            
             setUIEnabled(enabled: true)
             debugTextLabel.text = "Username and Password can't be empty"
         }
@@ -42,30 +39,24 @@ class LoginViewController: UIViewController {
             
             // get userID
             UdacityLogin.sharedInstance().loginToUdacity(username: usernameTextField.text!, password: passwordTextField.text!) { (sucess, error) in
-                
                 if sucess {
-                    
                     print("Login Sucess")
                     
                     // Fetching first and last name from Udacity.
                     UdacityLogin.sharedInstance().setFirstNameLastName() { (sucess, error) in
-                        
                         if sucess {
                             
                             // Fetching students information from Parse API.
                             StudentLocation.sharedInstance().gettingStudentLocations() { (sucess, error) in
-                                
                                 if sucess {
-                                    
                                     print("Login Complete")
                                     self.completeLogin()
                                 }
                                 
                                 else {
-                                    
+                                
                                     // MARK: Error fetching students information from Parse API.
                                     performUIUpdatesOnMain {
-                                        
                                         Alerts.sharedObject.showAlert(controller: self, title: "Fetch Info", message: error!)
                                         self.setUIEnabled(enabled: true)
                                     }
@@ -80,7 +71,6 @@ class LoginViewController: UIViewController {
                             
                             // MARK: Error fetching first and last name from Udacity.
                             performUIUpdatesOnMain {
-                                
                                 Alerts.sharedObject.showAlert(controller: self, title: "JSON Error", message: error!)
                                 self.setUIEnabled(enabled: true)
                             }
@@ -95,7 +85,6 @@ class LoginViewController: UIViewController {
                     
                     // MARK: Login Error
                     performUIUpdatesOnMain {
-                        
                         Alerts.sharedObject.showAlert(controller: self, title: "Login Failed", message: error!)
                         self.setUIEnabled(enabled: true)
                     }
@@ -110,18 +99,15 @@ class LoginViewController: UIViewController {
     
     // MARK: Account Sign Up
     @IBAction func accountSignUp(_ sender: AnyObject) {
-        
         Browser.sharedInstance().Open(Scheme: "https://www.udacity.com/account/auth#!/signup")
     }
 
     // MARK: Facebook Login button action
     @IBAction func loginFacebook(_ sender: AnyObject) {
-        
         setUIEnabled(enabled: false)
         let login = FBSDKLoginManager()
         login.loginBehavior = FBSDKLoginBehavior.systemAccount
         login.logIn(withReadPermissions: ["public_profile", "email"], from: self, handler: { (result, error) in
-            
             if error != nil {
                 
                 // MARK: Error Loggin Into Facebook
@@ -134,19 +120,15 @@ class LoginViewController: UIViewController {
             }
                 
             else if (result?.isCancelled)! {
-                
                 self.setUIEnabled(enabled: true)
             }
                 
             else {
-                
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email, first_name, last_name"]).start(completionHandler: { (connection, result, error)-> Void in
-                    
                     if error != nil {
                         
                         // MARK: Error Getting User Name
                         performUIUpdatesOnMain {
-                            
                             Alerts.sharedObject.showAlert(controller: self, title: "Error Getting User", message: error! as! String)
                             self.setUIEnabled(enabled: true)
                         }
@@ -154,9 +136,7 @@ class LoginViewController: UIViewController {
                     }
                         
                     else {
-                        
                         if let userDetails = result as? [String:String] {
-                            
                             let firstName = userDetails["first_name"]!
                             let lastName = userDetails["last_name"]!
                             
@@ -166,9 +146,7 @@ class LoginViewController: UIViewController {
                             UdacityLogin.sharedInstance().Name = firstName + " " + lastName
                             // Fetching student information from Udacity.
                             StudentLocation.sharedInstance().gettingStudentLocations { (success, errorString) in
-                                
                                 if success {
-            
                                     StudentsData.sharedInstance().isLoggedInFacebook = true
                                     self.completeLogin()
                                 }
@@ -177,7 +155,6 @@ class LoginViewController: UIViewController {
                                     
                                     // MARK: Error Getting Data from Udacity
                                     performUIUpdatesOnMain {
-                                        
                                         Alerts.sharedObject.showAlert(controller: self, title: "Fetch Info", message: errorString!)
                                         self.setUIEnabled(enabled: true)
                                     }
@@ -190,26 +167,20 @@ class LoginViewController: UIViewController {
                         
                     }
                     
-                }
-                
-                )
+                })
             }
             
-        }
-        
-        )
+        })
 
     }
     
     // MARK: Configure UI
     func setUIEnabled(enabled:Bool) {
-    
     usernameTextField.isEnabled = enabled
     passwordTextField.isEnabled = enabled
     debugTextLabel.text = ""
     loginButton.isEnabled = enabled
     if enabled {
-        
         activityIndicator.stopAnimating()
         loginButton.alpha = 1.0
         usernameTextField.alpha = 1.0
@@ -217,7 +188,6 @@ class LoginViewController: UIViewController {
     }
         
     else {
-        
         activityIndicator.startAnimating()
         loginButton.alpha = 0.5
         usernameTextField.alpha = 0.5
@@ -228,21 +198,17 @@ class LoginViewController: UIViewController {
     
     // MARK: Check Input text
     func isIncomplete()->Bool {
-        
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
-            
+
             return true
         }
         
         return false
-  
     }
     
     // MARK: Complete Login
     func completeLogin() {
-        
         performUIUpdatesOnMain {
-           
             self.setUIEnabled(enabled: true)
             self.passwordTextField.text = nil
             self.performSegue(withIdentifier: "LoginToTabBar", sender: self)

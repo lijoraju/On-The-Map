@@ -17,14 +17,11 @@ class Settings: UIViewController {
         
         // Fetching students infomation from parse API
         StudentLocation.sharedInstance().gettingStudentLocations { (sucess,error) in
-            
             if error != nil {
-                
                 completionHandler(false, error)
             }
                 
             else {
-                
                 completionHandler(true,nil)
             }
             
@@ -37,7 +34,6 @@ class Settings: UIViewController {
         
         // Logout from facebook
         if StudentsData.sharedInstance().isLoggedInFacebook {
-            
             FBSDKAccessToken.setCurrent(nil)
             FBSDKProfile.setCurrent(nil)
             let loginManager = FBSDKLoginManager()
@@ -47,14 +43,11 @@ class Settings: UIViewController {
         
         // Logout from Udacity
         UdacityLogin.sharedInstance().logoutFromUdacity { (sucess,error) in
-            
             if sucess {
-                
                 completionHandler(true)
             }
                 
             else {
-                
                 Alerts.sharedObject.showAlert(controller: self, title: "Logout Failed", message: error!)
             }
             
@@ -63,9 +56,7 @@ class Settings: UIViewController {
     }
 
     class func sharedInstance()-> Settings {
-        
         struct singleton {
-            
             static let sharedInstance = Settings()
         }
         

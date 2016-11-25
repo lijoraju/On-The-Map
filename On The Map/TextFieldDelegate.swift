@@ -17,6 +17,7 @@ class TextFieldDelegate: NSObject, UITextFieldDelegate {
         
         // Dismiss keyboard
         textField.endEditing(true)
+        
         return true
     }
     
@@ -26,13 +27,11 @@ extension UIViewController {
     
     // MARK: Close keyboard by touching anywhere
     func hideKeyboardWhenTappedAround() {
-        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
     func dismissKeyboard() {
-        
         view.endEditing(true)
     }
     

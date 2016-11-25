@@ -16,9 +16,7 @@ class StudentsData: NSData {
     
     // Allows other classes to reference a common instance of the mapPins array.
     class func sharedInstance()-> StudentsData {
-        
         struct Singleton {
-            
             static let sharedInstance = StudentsData()
         }
         

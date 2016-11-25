@@ -33,11 +33,11 @@ class UdacityLogin {
         
         // Initialize task for data retrieval.
         let task = session.dataTask(with: request as URLRequest) { (data,response,error) in
-            
             if error != nil {
               
-                // MARK: Connection Error
+              // MARK: Connection Error
               completionHandler(false, error!.localizedDescription)
+                
                 return
             }
             
@@ -47,13 +47,11 @@ class UdacityLogin {
             
             // MARK: Get user key
             if let userKey = (parseResult["account"] as? [String:Any])? ["key"] as? String {
-                
                 self.userKey = userKey
                 completionHandler(true,nil)
             }
                 
             else {
-                
                 completionHandler(false, "Incorrect Username Password")
             }
             
@@ -63,14 +61,12 @@ class UdacityLogin {
     }
     
     func setFirstNameLastName(completionHandler: @escaping(_ sucess: Bool, _ errorString: String?)-> Void) {
-        
         let request = NSMutableURLRequest(url:NSURL(string:"https://www.udacity.com/api/users/\(self.userKey)")! as URL)
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { (data,response,error) in
-            
             if error != nil {
-                
                 completionHandler(false, error!.localizedDescription)
+                
                 return
             }
             
@@ -80,17 +76,15 @@ class UdacityLogin {
             
             // MARK: Get first name and last name
             guard let user = (parseResult["user"] as? [String:Any]) else {
-                
                 completionHandler(false, "Could not retrieve User Info from Udacity.")
+                
                 return
             }
             
             if let firstName = user["first_name"] as? String, let lastName = user["last_name"] as? String {
-                
                 self.Name = firstName + " " + lastName
                 self.firstName = firstName
                 self.lastName = lastName
-                
             }
            
             completionHandler(true, nil)
@@ -100,43 +94,36 @@ class UdacityLogin {
     }
     
     func logoutFromUdacity(completionHandler: @escaping (_ sucess: Bool, _ errorString: String?)-> Void) {
-        
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
         for cookie in sharedCookieStorage.cookies! {
-            
             if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
-            
         }
         
         if let xsrfCookie = xsrfCookie {
-            
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
         
         let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+        let task = session.dataTask(with: request as URLRequest) {  (data, response, error) in
             if error != nil {
-                
                 completionHandler(false, error!.localizedDescription)
+                
                 return
             }
             
             let newData = data!.subdata(in: 5..<(data!.count))
             print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
             completionHandler(true, nil)
-            
         }
         
         task.resume()
     }
 
     class func sharedInstance()-> UdacityLogin {
-    
     struct Singleton {
-        
        static let sharedInstance = UdacityLogin()
     }
     

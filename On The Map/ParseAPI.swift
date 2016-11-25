@@ -16,7 +16,6 @@ class StudentLocation {
     
     // MARK: Fetching student locations from Parse API
     func gettingStudentLocations(completionHandler: @escaping (_ sucess: Bool, _ errorString: String?)-> Void) {
-        
         let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.addValue(self.Parse_ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(self.REST_APIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
@@ -26,16 +25,15 @@ class StudentLocation {
         
         // Initialize task for data retrieval.
         let task = session.dataTask(with: request as URLRequest) { (data,response,error) in
-            
             guard (error == nil) else {
-                
              completionHandler(false, error!.localizedDescription)
+                
                 return
             }
             
             guard let data = data else {
-            
                 completionHandler(false, "No data was returned by the request!")
+                
                 return
             }
             
@@ -45,7 +43,6 @@ class StudentLocation {
                 
                 // MARK: Retrieving each StudentLocation information
                 for result in results {
-                  
                     StudentsData.sharedInstance().mapPins.append(StudentDetails.init(data: result))
                 }
                 
@@ -53,7 +50,6 @@ class StudentLocation {
             }
             
             else {
-                
                 completionHandler(false, "Could not find key 'results' in \(parseResult)")
             }
             
@@ -64,7 +60,6 @@ class StudentLocation {
     
     //Submit a student information node to Parse.
     func postingStudentLocation(_ latitude: String, longitude: String, addressField: String, link: String, completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
-        
         let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.httpMethod = "POST"
         request.addValue(Constants.Parse_ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
@@ -78,22 +73,21 @@ class StudentLocation {
         let session = URLSession.shared
         
         //Initialize task for data retrieval.
-        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
             if error != nil {
                 completionHandler(false, "Failed to submit data.")
-            } else {
+            }else {
                 completionHandler(true, nil)
             }
+            
         })
+        
         task.resume()
     }
 
     
     class func sharedInstance()-> StudentLocation  {
-        
         struct Singleton {
-            
           static let sharedInstance = StudentLocation()
         }
         

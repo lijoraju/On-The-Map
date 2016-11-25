@@ -19,21 +19,16 @@ class ListViewController: UITableViewController {
     var thisUserPosted = false
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.tableView.reloadData()
     }
     
     // MARK: Logout button action
     @IBAction func tapLogoutButton(_ sender: AnyObject) {
-        
         self.setUIEnabled(false)
         Settings.sharedInstance().logoutButtonAction { (logout) in
-            
             if logout {
-                
                 performUIUpdatesOnMain {
-                    
                     self.setUIEnabled(true)
                     self.dismiss(animated: true, completion: nil)
                 }
@@ -46,21 +41,16 @@ class ListViewController: UITableViewController {
     
     // MARK: Refresh button action
     @IBAction func tapRefreshButton(_ sender: AnyObject) {
-        
         self.setUIEnabled(false)
         Settings.sharedInstance().refreshButtonAction { (refresh, errorString) in
-            
             if refresh {
-                
                 self.tableView.reloadData()
                 self.setUIEnabled(true)
             }
             
             else {
-                
                 self.setUIEnabled(true)
                 performUIUpdatesOnMain {
-                    
                     Alerts.sharedObject.showAlert(controller: self, title: "Failed To Refresh", message: errorString!)
                 }
         
@@ -72,17 +62,13 @@ class ListViewController: UITableViewController {
     
     // MARK: Pin button action
     @IBAction func tapPinButton(_ sender: AnyObject) {
-        
         self.setUIEnabled(false)
         if thisUserPosted {
-            
             showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
         }
         
         else {
-            
             performUIUpdatesOnMain {
-                
                 self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "ListToPin", sender: self)
             }
@@ -99,25 +85,22 @@ class ListViewController: UITableViewController {
     
     // Returns the table cell at the specified index path
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let mapPoint = StudentsData.sharedInstance().mapPins[(indexPath as NSIndexPath).row]
-        if mapPoint.Name == UdacityLogin.sharedInstance().Name {
-            
+        if mapPoint.name == UdacityLogin.sharedInstance().Name {
             thisUserPosted = true
         }
         
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         cell.imageView?.image = UIImage(named: "Pin")
-        cell.textLabel?.text = mapPoint.Name
+        cell.textLabel?.text = mapPoint.name
+        
         return cell
     }
     
     // Open Url when Row Selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         var urlArray: [String] = []
         for result in StudentsData.sharedInstance().mapPins {
-            
             urlArray.append(result.mediaURL)
         }
         
@@ -127,17 +110,13 @@ class ListViewController: UITableViewController {
     
     // MARK: Overwrite alert
     func showDoubleAlert(title: String, message: String) {
-        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result: UIAlertAction)-> Void in
-         
             self.setUIEnabled(true)
         }
         
         let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
-            
             performUIUpdatesOnMain {
-                
                 self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "ListToMap", sender: self)
             }
@@ -151,9 +130,7 @@ class ListViewController: UITableViewController {
     
     // MARK: Configure UI
     func setUIEnabled(_ enabled: Bool) {
-        
         if enabled {
-            
             table.alpha = 1.0
             activityIndicator.stopAnimating()
             logoutButton.isEnabled = true
@@ -162,7 +139,6 @@ class ListViewController: UITableViewController {
         }
         
         else {
-            
             table.alpha = 0.5
             activityIndicator.startAnimating()
             logoutButton.isEnabled = false

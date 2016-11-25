@@ -13,12 +13,10 @@ class Browser: UIViewController {
     
     // MARK: Open URL in browser
     func Open(Scheme: String) {
-        
         if let url = URL(string: Scheme) {
             
             // Opening a URL with iOS 10
             if #available(iOS 10, *) {
-                
                 UIApplication.shared.open(url, options: [:], completionHandler: { (sucess) in
                     print("Open \(url):\(sucess)")
                 })
@@ -27,7 +25,6 @@ class Browser: UIViewController {
                 
                 // Opening a URL with iOS 9 or earlier
             else {
-                
                 let sucess = UIApplication.shared.openURL(url)
                 print("Open \(url):\(sucess)")
             }
@@ -38,10 +35,8 @@ class Browser: UIViewController {
     
     // Escaping URL
     func cleanURL(url:String)-> String {
-        
         var testURL = url
         if testURL.characters.first != "h" && testURL.characters.first != "H" {
-            
             testURL = "http://" + testURL
         }
         
@@ -49,9 +44,7 @@ class Browser: UIViewController {
     }
     
     class func sharedInstance()-> Browser {
-        
         struct singleton {
-            
             static let sharedInstance = Browser()
         }
         
