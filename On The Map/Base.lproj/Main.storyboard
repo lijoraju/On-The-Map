@@ -308,12 +308,6 @@
                         <subviews>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="RxJ-wf-nxs" userLabel="Top View">
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Where are you studying today ?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ySh-3g-4lm" userLabel="Where r u studying today">
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="24"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a link to share" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-zF-MXC" userLabel="Enter Link">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -322,10 +316,16 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Where are you studying today ?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ySh-3g-4lm" userLabel="Where r u studying today">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="ySh-3g-4lm" firstAttribute="top" secondItem="RxJ-wf-nxs" secondAttribute="top" constant="-2" id="7ta-Ve-NRN"/>
+                                    <constraint firstItem="ySh-3g-4lm" firstAttribute="top" secondItem="RxJ-wf-nxs" secondAttribute="top" constant="-20" id="7ta-Ve-NRN"/>
                                     <constraint firstItem="ySh-3g-4lm" firstAttribute="leading" secondItem="7Wq-zF-MXC" secondAttribute="leading" id="8jJ-Ur-nDK"/>
                                     <constraint firstItem="ySh-3g-4lm" firstAttribute="centerX" secondItem="7Wq-zF-MXC" secondAttribute="centerX" id="FwQ-en-eUp"/>
                                     <constraint firstAttribute="trailing" secondItem="7Wq-zF-MXC" secondAttribute="trailing" id="UQC-kg-HzB"/>
@@ -380,14 +380,16 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="QjF-Pc-0e8" firstAttribute="centerY" secondItem="y1k-Hv-vzB" secondAttribute="centerY" id="0Zg-N7-ooR"/>
-                                    <constraint firstAttribute="trailing" secondItem="QjF-Pc-0e8" secondAttribute="trailing" constant="92" id="Cew-Yu-3ka"/>
+                                    <constraint firstAttribute="trailing" secondItem="QjF-Pc-0e8" secondAttribute="trailing" id="Cew-Yu-3ka"/>
                                     <constraint firstItem="T6O-f1-MmQ" firstAttribute="top" secondItem="y1k-Hv-vzB" secondAttribute="topMargin" id="DU5-AQ-JTG"/>
                                     <constraint firstItem="QjF-Pc-0e8" firstAttribute="top" secondItem="T6O-f1-MmQ" secondAttribute="bottom" constant="11" id="TEU-WV-oG6"/>
-                                    <constraint firstItem="QjF-Pc-0e8" firstAttribute="leading" secondItem="y1k-Hv-vzB" secondAttribute="leading" constant="92" id="XpH-tG-7TW"/>
+                                    <constraint firstItem="QjF-Pc-0e8" firstAttribute="leading" secondItem="y1k-Hv-vzB" secondAttribute="leading" id="XpH-tG-7TW"/>
                                     <constraint firstItem="QjF-Pc-0e8" firstAttribute="centerX" secondItem="T6O-f1-MmQ" secondAttribute="centerX" constant="1.5" id="att-RT-6uv"/>
+                                    <constraint firstItem="QjF-Pc-0e8" firstAttribute="leading" secondItem="y1k-Hv-vzB" secondAttribute="leading" id="lPV-le-ZKX"/>
+                                    <constraint firstAttribute="trailing" secondItem="QjF-Pc-0e8" secondAttribute="trailing" id="oPX-VA-4ge"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="NOa-OT-Pe5">
