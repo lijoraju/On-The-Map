@@ -10,6 +10,8 @@ import Foundation
 
 class StudentLocation {
     
+    static let sharedInstance = StudentLocation()
+    
     // These shared keys are used by all students in Udacity.com's "iOS Networking with Swift" course.
     let Parse_ApplicationID = Constants.Parse_ApplicationID
     let REST_APIKey = Constants.REST_APIKey
@@ -43,7 +45,7 @@ class StudentLocation {
                 
                 // MARK: Retrieving each StudentLocation information
                 for result in results {
-                    StudentsData.sharedInstance().mapPins.append(StudentDetails.init(data: result))
+                    StudentsData.sharedInstance.mapPins.append(StudentDetails.init(data: result))
                 }
                 
                 completionHandler(true, nil)
@@ -67,7 +69,7 @@ class StudentLocation {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         //API Parameters.
-        request.httpBody = "{\"uniqueKey\": \"\(UdacityLogin.sharedInstance().userKey)\", \"firstName\": \"\(UdacityLogin.sharedInstance().firstName)\", \"lastName\": \"\(UdacityLogin.sharedInstance().lastName)\",\"mapString\": \"\(addressField)\", \"mediaURL\": \"\(link)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(UdacityLogin.sharedInstance.userKey)\", \"firstName\": \"\(UdacityLogin.sharedInstance.firstName)\", \"lastName\": \"\(UdacityLogin.sharedInstance.lastName)\",\"mapString\": \"\(addressField)\", \"mediaURL\": \"\(link)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
         
         //Initialize session.
         let session = URLSession.shared
@@ -85,13 +87,4 @@ class StudentLocation {
         task.resume()
     }
 
-    
-    class func sharedInstance()-> StudentLocation  {
-        struct Singleton {
-          static let sharedInstance = StudentLocation()
-        }
-        
-        return Singleton.sharedInstance
-    }
-    
 }

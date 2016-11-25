@@ -30,7 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //remove all previous annotations
         let allAnnotations = self.mapView.annotations
         mapView.removeAnnotations(allAnnotations)
-        for result in StudentsData.sharedInstance().mapPins {
+        for result in StudentsData.sharedInstance.mapPins {
             
             // Create annotation
             let annotation = MKPointAnnotation()
@@ -47,7 +47,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(annotation)
             
             // Check whether this user already posted
-            if result.name == UdacityLogin.sharedInstance().Name {
+            if result.name == UdacityLogin.sharedInstance.Name {
                 thisUserPosted = true
             }
             
@@ -83,14 +83,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
  
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let url = Browser.sharedInstance().cleanURL(url: view.annotation!.subtitle!!)
-        Browser.sharedInstance().Open(Scheme: url)
+        let url = Browser.sharedInstance.cleanURL(url: view.annotation!.subtitle!!)
+        Browser.sharedInstance.Open(Scheme: url)
     }
     
     // MARK: Refreshing Map View
     @IBAction func tapRefreshButton(_ sender: AnyObject) {
         setUIEnabled(false)
-        Settings.sharedInstance().refreshButtonAction { (refresh, errorString) in
+        Settings.sharedInstance.refreshButtonAction { (refresh, errorString) in
             if refresh {
                 performUIUpdatesOnMain {
                     self.reloadMapView()
@@ -99,9 +99,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             
             else {
-                self.setUIEnabled(true)
                 performUIUpdatesOnMain {
                     Alerts.sharedObject.showAlert(controller: self, title: "Failed To Refresh", message: errorString!)
+                    self.setUIEnabled(true)
                 }
                 
             }
@@ -113,13 +113,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // MARK: Logout from Udacity API or Facebook API
     @IBAction func tapLogoutButton(_ sender: AnyObject) {
         setUIEnabled(false)
-        Settings.sharedInstance().logoutButtonAction { (logout) in
+        Settings.sharedInstance.logoutButtonAction { (logout, errorString) in
             if logout {
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
                     self.dismiss(animated: true, completion: nil)
                 }
-
+                
+            }
+        
+                else {
+                    performUIUpdatesOnMain {
+                        Alerts.sharedObject.showAlert(controller: self, title: "Logout Failed", message: errorString!)
+                        self.setUIEnabled(true)
+                    }
+                
             }
             
         }
@@ -143,7 +151,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         alert.addAction(cancelAction)
         alert.addAction(overwriteAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: Configure UI

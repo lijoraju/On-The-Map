@@ -12,11 +12,13 @@ import FBSDKLoginKit
 
 class Settings: UIViewController {
    
+    static let sharedInstance = Settings()
+    
     // MARK: Refresh map
     func refreshButtonAction(completionHandler: @escaping(_ refresh: Bool, _ error: String?)-> Void) {
         
         // Fetching students infomation from parse API
-        StudentLocation.sharedInstance().gettingStudentLocations { (sucess,error) in
+        StudentLocation.sharedInstance.gettingStudentLocations { (sucess,error) in
             if error != nil {
                 completionHandler(false, error)
             }
@@ -30,37 +32,29 @@ class Settings: UIViewController {
     }
     
     // MARK: Logout from udacity API
-    func logoutButtonAction(completionHandler: @escaping(_ logout: Bool)-> Void) {
+    func logoutButtonAction(completionHandler: @escaping(_ logout: Bool, _ error: String?)-> Void) {
         
         // Logout from facebook
-        if StudentsData.sharedInstance().isLoggedInFacebook {
+        if StudentsData.sharedInstance.isLoggedInFacebook {
             FBSDKAccessToken.setCurrent(nil)
             FBSDKProfile.setCurrent(nil)
             let loginManager = FBSDKLoginManager()
             loginManager.logOut()
-            StudentsData.sharedInstance().isLoggedInFacebook = false
+            StudentsData.sharedInstance.isLoggedInFacebook = false
         }
         
         // Logout from Udacity
-        UdacityLogin.sharedInstance().logoutFromUdacity { (sucess,error) in
+        UdacityLogin.sharedInstance.logoutFromUdacity { (sucess,error) in
             if sucess {
-                completionHandler(true)
+                completionHandler(true, nil)
             }
                 
             else {
-                Alerts.sharedObject.showAlert(controller: self, title: "Logout Failed", message: error!)
+                completionHandler(false, error)
             }
             
         }
         
     }
 
-    class func sharedInstance()-> Settings {
-        struct singleton {
-            static let sharedInstance = Settings()
-        }
-        
-        return singleton.sharedInstance
-    }
-    
-}
+ }

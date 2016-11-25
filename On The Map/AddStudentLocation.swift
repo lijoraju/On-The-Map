@@ -84,7 +84,7 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate {
      
   @IBAction func submitStudentLocation(_ sender: AnyObject) {
      self.setUIEnabled(enabled: false)
-     StudentLocation.sharedInstance().postingStudentLocation(coordinates.latitude.description , longitude: coordinates.longitude.description, addressField: location.text!, link: enterLink.text!) { (sucess,error) in
+     StudentLocation.sharedInstance.postingStudentLocation(coordinates.latitude.description , longitude: coordinates.longitude.description, addressField: location.text!, link: enterLink.text!) { (sucess,error) in
      if sucess {
      performUIUpdatesOnMain {
         self.dismiss(animated: true, completion: nil)

@@ -11,6 +11,8 @@ import UIKit
 
 class Browser: UIViewController {
     
+    static let sharedInstance = Browser()
+    
     // MARK: Open URL in browser
     func Open(Scheme: String) {
         if let url = URL(string: Scheme) {
@@ -43,12 +45,4 @@ class Browser: UIViewController {
         return String(testURL.characters.filter{!"".characters.contains($0)})
     }
     
-    class func sharedInstance()-> Browser {
-        struct singleton {
-            static let sharedInstance = Browser()
-        }
-        
-        return singleton.sharedInstance
-    }
-
 }

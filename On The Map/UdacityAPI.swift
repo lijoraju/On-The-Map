@@ -10,6 +10,8 @@ import Foundation
 
 class UdacityLogin {
     
+    static let sharedInstance = UdacityLogin()
+    
     // MARK: Info about the user, provided through authentication
     var userKey = ""
     var Name = ""
@@ -122,12 +124,4 @@ class UdacityLogin {
         task.resume()
     }
 
-    class func sharedInstance()-> UdacityLogin {
-    struct Singleton {
-       static let sharedInstance = UdacityLogin()
-    }
-    
-    return Singleton.sharedInstance
-   }
-    
 }

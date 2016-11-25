@@ -14,7 +14,6 @@ class ListViewController: UITableViewController {
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var pinButton: UIBarButtonItem!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var thisUserPosted = false
     
@@ -26,11 +25,19 @@ class ListViewController: UITableViewController {
     // MARK: Logout button action
     @IBAction func tapLogoutButton(_ sender: AnyObject) {
         self.setUIEnabled(false)
-        Settings.sharedInstance().logoutButtonAction { (logout) in
+        Settings.sharedInstance.logoutButtonAction { (logout, errorString) in
             if logout {
                 performUIUpdatesOnMain {
                     self.setUIEnabled(true)
                     self.dismiss(animated: true, completion: nil)
+                }
+                
+            }
+            
+            else {
+                performUIUpdatesOnMain {
+                    Alerts.sharedObject.showAlert(controller: self, title: "Logout Failed", message: errorString!)
+                    self.setUIEnabled(true)
                 }
                 
             }
@@ -42,16 +49,16 @@ class ListViewController: UITableViewController {
     // MARK: Refresh button action
     @IBAction func tapRefreshButton(_ sender: AnyObject) {
         self.setUIEnabled(false)
-        Settings.sharedInstance().refreshButtonAction { (refresh, errorString) in
+        Settings.sharedInstance.refreshButtonAction { (refresh, errorString) in
             if refresh {
                 self.tableView.reloadData()
                 self.setUIEnabled(true)
             }
             
             else {
-                self.setUIEnabled(true)
                 performUIUpdatesOnMain {
                     Alerts.sharedObject.showAlert(controller: self, title: "Failed To Refresh", message: errorString!)
+                    self.setUIEnabled(true)
                 }
         
             }
@@ -80,13 +87,13 @@ class ListViewController: UITableViewController {
     // Returns the number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return StudentsData.sharedInstance().mapPins.count
+        return StudentsData.sharedInstance.mapPins.count
     }
     
     // Returns the table cell at the specified index path
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let mapPoint = StudentsData.sharedInstance().mapPins[(indexPath as NSIndexPath).row]
-        if mapPoint.name == UdacityLogin.sharedInstance().Name {
+        let mapPoint = StudentsData.sharedInstance.mapPins[(indexPath as NSIndexPath).row]
+        if mapPoint.name == UdacityLogin.sharedInstance.Name {
             thisUserPosted = true
         }
         
@@ -100,12 +107,12 @@ class ListViewController: UITableViewController {
     // Open Url when Row Selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var urlArray: [String] = []
-        for result in StudentsData.sharedInstance().mapPins {
+        for result in StudentsData.sharedInstance.mapPins {
             urlArray.append(result.mediaURL)
         }
         
-        let url = Browser.sharedInstance().cleanURL(url: urlArray[indexPath.row])
-        Browser.sharedInstance().Open(Scheme: url)
+        let url = Browser.sharedInstance.cleanURL(url: urlArray[indexPath.row])
+        Browser.sharedInstance.Open(Scheme: url)
     }
     
     // MARK: Overwrite alert
@@ -125,22 +132,20 @@ class ListViewController: UITableViewController {
         
         alert.addAction(cancelAction)
         alert.addAction(overwriteAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: Configure UI
     func setUIEnabled(_ enabled: Bool) {
         if enabled {
             table.alpha = 1.0
-            activityIndicator.stopAnimating()
             logoutButton.isEnabled = true
             refreshButton.isEnabled = true
             pinButton.isEnabled = true
         }
         
         else {
-            table.alpha = 0.5
-            activityIndicator.startAnimating()
+            table.alpha = 0.6
             logoutButton.isEnabled = false
             refreshButton.isEnabled = false
             pinButton.isEnabled = false

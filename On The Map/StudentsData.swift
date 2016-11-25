@@ -15,12 +15,5 @@ class StudentsData: NSData {
     var isLoggedInFacebook = false
     
     // Allows other classes to reference a common instance of the mapPins array.
-    class func sharedInstance()-> StudentsData {
-        struct Singleton {
-            static let sharedInstance = StudentsData()
-        }
-        
-        return Singleton.sharedInstance
-    }
-    
+     static let sharedInstance = StudentsData()
 }

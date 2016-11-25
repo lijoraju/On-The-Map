@@ -38,16 +38,16 @@ class LoginViewController: UIViewController {
         else {
             
             // get userID
-            UdacityLogin.sharedInstance().loginToUdacity(username: usernameTextField.text!, password: passwordTextField.text!) { (sucess, error) in
+            UdacityLogin.sharedInstance.loginToUdacity(username: usernameTextField.text!, password: passwordTextField.text!) { (sucess, error) in
                 if sucess {
                     print("Login Sucess")
                     
                     // Fetching first and last name from Udacity.
-                    UdacityLogin.sharedInstance().setFirstNameLastName() { (sucess, error) in
+                    UdacityLogin.sharedInstance.setFirstNameLastName() { (sucess, error) in
                         if sucess {
                             
                             // Fetching students information from Parse API.
-                            StudentLocation.sharedInstance().gettingStudentLocations() { (sucess, error) in
+                            StudentLocation.sharedInstance.gettingStudentLocations() { (sucess, error) in
                                 if sucess {
                                     print("Login Complete")
                                     self.completeLogin()
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
     
     // MARK: Account Sign Up
     @IBAction func accountSignUp(_ sender: AnyObject) {
-        Browser.sharedInstance().Open(Scheme: "https://www.udacity.com/account/auth#!/signup")
+        Browser.sharedInstance.Open(Scheme: "https://www.udacity.com/account/auth#!/signup")
     }
 
     // MARK: Facebook Login button action
@@ -141,13 +141,13 @@ class LoginViewController: UIViewController {
                             let lastName = userDetails["last_name"]!
                             
                             // Set name From Facebook
-                            UdacityLogin.sharedInstance().firstName = firstName
-                            UdacityLogin.sharedInstance().lastName = lastName
-                            UdacityLogin.sharedInstance().Name = firstName + " " + lastName
+                            UdacityLogin.sharedInstance.firstName = firstName
+                            UdacityLogin.sharedInstance.lastName = lastName
+                            UdacityLogin.sharedInstance.Name = firstName + " " + lastName
                             // Fetching student information from Udacity.
-                            StudentLocation.sharedInstance().gettingStudentLocations { (success, errorString) in
+                            StudentLocation.sharedInstance.gettingStudentLocations { (success, errorString) in
                                 if success {
-                                    StudentsData.sharedInstance().isLoggedInFacebook = true
+                                    StudentsData.sharedInstance.isLoggedInFacebook = true
                                     self.completeLogin()
                                 }
                                     
