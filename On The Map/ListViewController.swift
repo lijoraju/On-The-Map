@@ -15,8 +15,6 @@ class ListViewController: UITableViewController {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var pinButton: UIBarButtonItem!
     
-    var thisUserPosted = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.reloadData()
@@ -69,14 +67,12 @@ class ListViewController: UITableViewController {
     
     // MARK: Pin button action
     @IBAction func tapPinButton(_ sender: AnyObject) {
-        self.setUIEnabled(false)
         if thisUserPosted {
-            showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
+            showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location", identifier: "ListToPin")
         }
         
         else {
             performUIUpdatesOnMain {
-                self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "ListToPin", sender: self)
             }
             
@@ -86,7 +82,6 @@ class ListViewController: UITableViewController {
     
     // Returns the number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return StudentsData.sharedInstance.mapPins.count
     }
     
@@ -107,6 +102,9 @@ class ListViewController: UITableViewController {
     // Open Url when Row Selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var urlArray: [String] = []
+        
+        // Deselect the selected row here so that the row doesn't remain in the selected state after opening the browser
+        tableView.deselectRow(at: indexPath, animated: true)
         for result in StudentsData.sharedInstance.mapPins {
             urlArray.append(result.mediaURL)
         }
@@ -115,40 +113,26 @@ class ListViewController: UITableViewController {
         Browser.sharedInstance.Open(Scheme: url)
     }
     
-    // MARK: Overwrite alert
-    func showDoubleAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result: UIAlertAction)-> Void in
-            self.setUIEnabled(true)
-        }
-        
-        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
-            performUIUpdatesOnMain {
-                self.setUIEnabled(true)
-                self.performSegue(withIdentifier: "ListToMap", sender: self)
-            }
-            
-        }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(overwriteAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
     // MARK: Configure UI
     func setUIEnabled(_ enabled: Bool) {
         if enabled {
-            table.alpha = 1.0
-            logoutButton.isEnabled = true
-            refreshButton.isEnabled = true
-            pinButton.isEnabled = true
+            performUIUpdatesOnMain {
+                self.table.alpha = 1.0
+                self.logoutButton.isEnabled = true
+                self.refreshButton.isEnabled = true
+                self.pinButton.isEnabled = true
+            }
+           
         }
         
         else {
-            table.alpha = 0.6
-            logoutButton.isEnabled = false
-            refreshButton.isEnabled = false
-            pinButton.isEnabled = false
+            performUIUpdatesOnMain {
+                self.table.alpha = 0.6
+                self.logoutButton.isEnabled = false
+                self.refreshButton.isEnabled = false
+                self.pinButton.isEnabled = false
+            }
+            
         }
         
     }

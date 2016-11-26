@@ -35,4 +35,24 @@ extension UIViewController {
         view.endEditing(true)
     }
     
+    // MARK: Overwrite alert
+    func showDoubleAlert(title: String, message: String, identifier: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result: UIAlertAction)-> Void in
+           // self.setUIEnabled(true)
+        }
+        
+        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
+            performUIUpdatesOnMain {
+                //self.setUIEnabled(true)
+                self.performSegue(withIdentifier: identifier, sender: self)
+            }
+            
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(overwriteAction)
+        present(alert, animated: true, completion: nil)
+    }
+
 }

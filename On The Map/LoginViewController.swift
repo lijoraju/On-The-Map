@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         usernameTextField.delegate = textFieldDelegate
         passwordTextField.delegate = textFieldDelegate
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround()
     }
      
     // MARK: Login with Email Function
@@ -181,17 +181,23 @@ class LoginViewController: UIViewController {
     debugTextLabel.text = ""
     loginButton.isEnabled = enabled
     if enabled {
-        activityIndicator.stopAnimating()
-        loginButton.alpha = 1.0
-        usernameTextField.alpha = 1.0
-        passwordTextField.alpha = 1.0
+        performUIUpdatesOnMain {
+            self.activityIndicator.stopAnimating()
+            self.loginButton.alpha = 1.0
+            self.usernameTextField.alpha = 1.0
+            self.passwordTextField.alpha = 1.0
+
+        }
     }
         
     else {
-        activityIndicator.startAnimating()
-        loginButton.alpha = 0.5
-        usernameTextField.alpha = 0.5
-        passwordTextField.alpha = 0.5
+        performUIUpdatesOnMain {
+            self.activityIndicator.startAnimating()
+            self.loginButton.alpha = 0.5
+            self.usernameTextField.alpha = 0.5
+            self.passwordTextField.alpha = 0.5
+        }
+        
         }
     
     }

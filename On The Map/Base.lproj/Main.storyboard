@@ -173,7 +173,7 @@
                         <outlet property="pinButton" destination="n1p-MW-NlO" id="2ac-gc-uNt"/>
                         <outlet property="refreshButton" destination="k3S-Dy-CRf" id="dSr-cW-Spv"/>
                         <outlet property="table" destination="OvL-up-Trc" id="fHO-Hq-K8v"/>
-                        <segue destination="ief-lb-609" kind="presentation" identifier="ListToMap" id="p7R-6f-57A"/>
+                        <segue destination="ief-lb-609" kind="presentation" identifier="ListToPin" id="p7R-6f-57A"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6cu-VB-Xi2" userLabel="First Responder" sceneMemberID="firstResponder"/>

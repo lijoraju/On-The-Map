@@ -33,7 +33,7 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate {
             super.viewDidLoad()
             enterLink.delegate = textFieldDelegate
             location.delegate = textFieldDelegate
-            self.hideKeyboardWhenTappedAround()
+            hideKeyboardWhenTappedAround()
             displayOriginalUI()
         }
     
@@ -120,23 +120,29 @@ class AddStudentLocation: UIViewController, MKMapViewDelegate {
             findLocationOnMap.isEnabled = true
             enterLink.isEnabled = true
             if enabled {
-                activityIndicator.stopAnimating()
-                location.alpha = 1.0
-                submitButton.alpha = 1.0
-                findLocationOnMap.alpha = 1.0
-                enterLink.alpha = 1.0
-                mapView.alpha = 1.0
-                where2Study.alpha = 1.0
+                performUIUpdatesOnMain {
+                    self.activityIndicator.stopAnimating()
+                    self.location.alpha = 1.0
+                    self.submitButton.alpha = 1.0
+                    self.findLocationOnMap.alpha = 1.0
+                    self.enterLink.alpha = 1.0
+                    self.mapView.alpha = 1.0
+                    self.where2Study.alpha = 1.0
+                }
+                
             }
      
             else {
-                activityIndicator.startAnimating()
-                location.alpha = 0.3
-                submitButton.alpha = 0.3
-                findLocationOnMap.alpha = 0.3
-                enterLink.alpha = 0.3
-                mapView.alpha = 0.5
-                where2Study.alpha = 0.3
+                performUIUpdatesOnMain {
+                    self.activityIndicator.startAnimating()
+                    self.location.alpha = 0.3
+                    self.submitButton.alpha = 0.3
+                    self.findLocationOnMap.alpha = 0.3
+                    self.enterLink.alpha = 0.3
+                    self.mapView.alpha = 0.5
+                    self.where2Study.alpha = 0.3
+                }
+                
             }
      
         }

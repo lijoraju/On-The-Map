@@ -9,9 +9,9 @@
 import UIKit
 import MapKit
 
+var thisUserPosted = false
+
 class MapViewController: UIViewController, MKMapViewDelegate {
-    
-    var thisUserPosted = false
     
     @IBOutlet weak var pinButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
@@ -58,15 +58,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
    
     // MARK: Tap on Pin Button
     @IBAction func tapPinButton(_ sender: AnyObject) {
-        setUIEnabled(false)
         if thisUserPosted {
-            showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location")
+            showDoubleAlert(title: "Overwrite", message: "Would you like to overwrite your current location", identifier: "MapToPin")
         }
             
         else {
             performUIUpdatesOnMain {
-                
-                self.setUIEnabled(true)
                 self.performSegue(withIdentifier: "MapToPin", sender: self)
             }
             
@@ -134,42 +131,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    // MARK: Overwrite alert
-    func showDoubleAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result: UIAlertAction)-> Void in
-            self.setUIEnabled(true)
-        }
-        
-        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default) { (result: UIAlertAction)-> Void in
+    // MARK: Configure UI
+    func setUIEnabled(_ enabled: Bool) {
+        if enabled {
             performUIUpdatesOnMain {
-                self.setUIEnabled(true)
-                self.performSegue(withIdentifier: "MapToPin", sender: self)
+                self.activityIndicator.stopAnimating()
+                self.mapView.alpha = 1.0
+                self.logoutButton.isEnabled = true
+                self.refreshButton.isEnabled = true
+                self.pinButton.isEnabled = true
             }
             
         }
         
-        alert.addAction(cancelAction)
-        alert.addAction(overwriteAction)
-        present(alert, animated: true, completion: nil)
-    }
-
-    // MARK: Configure UI
-    func setUIEnabled(_ enabled: Bool) {
-        if enabled {
-            activityIndicator.stopAnimating()
-            mapView.alpha = 1.0
-            logoutButton.isEnabled = true
-            refreshButton.isEnabled = true
-            pinButton.isEnabled = true
-        }
-        
         else {
-            activityIndicator.startAnimating()
-            mapView.alpha = 0.5
-            logoutButton.isEnabled = false
-            refreshButton.isEnabled = false
-            pinButton.isEnabled = false
+            performUIUpdatesOnMain {
+                self.activityIndicator.startAnimating()
+                self.mapView.alpha = 0.5
+                self.logoutButton.isEnabled = false
+                self.refreshButton.isEnabled = false
+                self.pinButton.isEnabled = false
+            }
+            
         }
         
     }
